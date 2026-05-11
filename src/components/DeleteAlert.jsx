@@ -1,0 +1,57 @@
+"use client";
+
+import { AlertDialog, Button } from "@heroui/react";
+import { redirect } from "next/navigation";
+import { BiTrash } from "react-icons/bi";
+
+export function DeleteAlert({ destination }) {
+  const { _id, destinationName } = destination;
+  const handleDelete = async () => {
+    const res = await fetch(`http://localhost:5000/destination/${_id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      }
+    });
+    const data = await res.json()
+    redirect("/destinations")
+  };
+  return (
+    <AlertDialog>
+      <Button variant="outline" className={"text-red-500 rounded-none"}>
+        {" "}
+        <BiTrash></BiTrash> Delete
+      </Button>
+      <AlertDialog.Backdrop>
+        <AlertDialog.Container>
+          <AlertDialog.Dialog className="sm:max-w-[400px]">
+            <AlertDialog.CloseTrigger />
+            <AlertDialog.Header>
+              <AlertDialog.Icon status="danger" />
+              <AlertDialog.Heading>
+                Delete destination permanently?
+              </AlertDialog.Heading>
+            </AlertDialog.Header>
+            <AlertDialog.Body>
+              <p>
+                Are you sure you want to delete{" "}
+                <strong>{destinationName}</strong> ? This action cannot be
+                undone and will permanently remove this travel package from the
+                system.
+              </p>
+            </AlertDialog.Body>
+            <AlertDialog.Footer>
+              <Button slot="close" variant="tertiary">
+                Cancel
+              </Button>
+              <Button onClick={handleDelete} slot="close" variant="danger">
+                Delete Destination
+              </Button>
+            </AlertDialog.Footer>
+          </AlertDialog.Dialog>
+        </AlertDialog.Container>
+      </AlertDialog.Backdrop>
+    </AlertDialog>
+  );
+}
+export default DeleteAlert;
