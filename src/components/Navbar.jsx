@@ -3,53 +3,34 @@ import { authClient } from "@/lib/auth-client";
 import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 const Navbar = () => {
     const { data: session } = authClient.useSession();
     const user = session?.user;
+    const pathname = usePathname();
+    const router = useRouter();
 
     const handleSignOut = async () => {
         await authClient.signOut();
+        router.push("/login")
     };
     return (
-        // <nav className="max-w-7xl mx-auto  grid grid-cols-3 justify-between items-center bg-white py-5">
         <nav className="mx-auto px-10 flex justify-between items-center bg-white py-5">
             <ul className="flex  gap-5">
                 <li>
-                    <Link href={"/"}>Home</Link>
+                    <Link href={"/"} className={pathname === "/" ? "text-cyan-500 font-bold" : ""}>Home</Link>
                 </li>
                 <li>
-                    <Link href={"/destinations"}>Destinations</Link>
+                    <Link href={"/destinations"} className={pathname === "/destinations" ? "text-cyan-500 font-bold" : ""}>Destinations</Link>
                 </li>
                 <li>
-                    <Link href={"/my-bookings"}>My Bookings</Link>
+                    <Link href={"/my-bookings"} className={pathname === "/my-bookings" ? "text-cyan-500 font-bold" : ""}>My Bookings</Link>
                 </li>
 
                 <li>
-                    <Link href={"/add-destination"}>Add Destination</Link>
-                </li>
-            </ul>
-
-            <div className="">
-                {/* <Image
-                    src={"/assets/Wanderlast.png"}
-                    height={150}
-                    width={150}
-                    alt="logo"
-                /> */}
-                <h1 className="text-3xl text-sky-300 font-bold">Wanderlast</h1>
-            </div>
-
-            <ul className="flex  gap-5">
-                <li>
-                    <Link href={"/profile"}>Profile</Link>
-                </li>
-                <li>
-                    <Link href={"/login"}>Login</Link>
-                </li>
-                <li>
-                    <Link href={"/signup"}>Sign Up</Link>
+                    <Link href={"/add-destination"} className={pathname === "/add-destination" ? "text-cyan-500 font-bold" : ""}>Add Destination</Link>
                 </li>
             </ul>
 
@@ -64,7 +45,7 @@ const Navbar = () => {
 
             <ul className="flex items-center gap-3">
                 <li>
-                    <Link href={"/profile"}>Profile</Link>
+                    <Link href={"/profile"} className={pathname === "/profile" ? "text-cyan-500 font-bold" : ""}>Profile</Link>
                 </li>
 
                 {user ? (
@@ -84,10 +65,10 @@ const Navbar = () => {
                 ) : (
                     <>
                         <li>
-                            <Link href={"/login"}>Login</Link>
+                            <Link href={"/login"} className={pathname === "/login" ? "text-cyan-500 font-bold" : ""}>Login</Link>
                         </li>
                         <li>
-                            <Link href={"/signup"}>Sign Up</Link>
+                            <Link href={"/signup"} className={pathname === "/signup" ? "text-cyan-500 font-bold" : ""}>Sign Up</Link>
                         </li>
                     </>
                 )}
