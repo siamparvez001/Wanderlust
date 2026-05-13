@@ -27,14 +27,14 @@ const SignUpPage = () => {
             name: user.name,
             image: user.image,
         });
-
+        console.log({data, error})
         if (data) {
             redirect("/");
         }
 
         if (error) {
             // toast
-            alert("Error");
+            alert(error.message || "Error");
         }
     };
 
