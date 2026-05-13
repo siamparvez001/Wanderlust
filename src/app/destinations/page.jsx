@@ -1,4 +1,5 @@
 import DestinationCard from "@/components/DestinationCard";
+export const dynamic = 'force-dynamic';
 const DestinationsPage = async () => {
     const res = await fetch('http://localhost:5000/destination')
     const destinations = await res.json()
