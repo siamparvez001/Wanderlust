@@ -1,7 +1,7 @@
 import DestinationCard from "@/components/DestinationCard";
 export const dynamic = 'force-dynamic';
 const DestinationsPage = async () => {
-    const res = await fetch('http://localhost:5000/destination')
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination`, {cache:"no-store"})
     const destinations = await res.json()
     // console.log(destinations)
     return (

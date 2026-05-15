@@ -4,13 +4,15 @@ import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 
 const Navbar = () => {
     const { data: session } = authClient.useSession();
     const user = session?.user;
     const pathname = usePathname();
     const router = useRouter();
+
+
 
     const handleSignOut = async () => {
         await authClient.signOut();
@@ -48,7 +50,7 @@ const Navbar = () => {
                     <Link href={"/profile"} className={pathname === "/profile" ? "text-cyan-500 font-bold" : ""}>Profile</Link>
                 </li>
 
-                {user ? (
+                { user ? (
                     <>
                         <li>
                             <Avatar>

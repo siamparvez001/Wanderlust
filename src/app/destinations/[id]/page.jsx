@@ -1,7 +1,10 @@
 import BookingCard from "@/components/BookingCard";
 import DeleteAlert from "@/components/DeleteAlert";
 import { EditModal } from "@/components/EditModal";
+import { auth } from "@/lib/auth";
 import { Button } from "@heroui/react";
+import { headers } from "next/headers";
+
 import Image from "next/image";
 import { BiEdit } from "react-icons/bi";
 import { LuMapPin } from "react-icons/lu";
@@ -9,9 +12,19 @@ import { SlCalender } from "react-icons/sl";
 
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const res = await fetch(`http://localhost:5000/destination/${id}`);
+  const token = await auth.api.getToken({
+    headers : await headers()
+  })
+  console.log(token.token)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${id}`,{cache:"no-store"},{
+    headers: {
+    authorization: `Bearer ${token.token}`
+    }
+  }
+  
+  );
   const destination = await res.json();
-  // console.log(destination);
+  console.log(destination);
   const {
     _id,
     country,
@@ -23,7 +36,7 @@ const DestinationDetailsPage = async ({ params }) => {
   } = destination;
   // console.log(id)
   return (
-    <div className="max-w-7xl mx-auto px-10"> 
+    <div className="max-w-7xl mx-auto px-10">
       <div className="flex justify-end items-center gap-5">
         <EditModal destination={destination}></EditModal>
         <DeleteAlert destination={destination}></DeleteAlert>

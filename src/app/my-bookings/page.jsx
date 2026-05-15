@@ -12,8 +12,15 @@ const MyBookingPage = async () => {
     const session = await auth.api.getSession({
         headers: await headers()
     })
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
     const user = session?.user
-    const res = await fetch(`http://localhost:5000/booking/${user?.id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${user?.id}`,{
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    },{cache:"no-store"})
     const bookings = await res.json()
     const length = bookings.length
     console.log(bookings.length)
@@ -21,8 +28,8 @@ const MyBookingPage = async () => {
         <div className='max-w-7xl mx-auto'>
             <h1 className='text-4xl text-cyan-500 mb-5 px-10'>My Bookings</h1>
             <div className='flex flex-col gap-5 '>
-                
-                {bookings.length>0 ?(
+
+                {bookings.length > 0 ? (
                     bookings.map(booking =>
                         <div key={booking._id}>
                             <div className='border flex justify-start items-center gap-10  p-3'>
@@ -68,7 +75,7 @@ const MyBookingPage = async () => {
                                 </div>
                             </div>
                         </div>
-                    )) : 
+                    )) :
                     (
                         <p className='text-4xl font-bold text-center my-10'>No booking found</p>
                     )
