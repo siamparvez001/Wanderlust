@@ -48,7 +48,7 @@ const DestinationDetailsPage = async ({ params }) => {
         width={800}
         height={100}
       />
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center gap-19">
         <div className="p-2">
           <div className="flex items-center gap-2 my-3 text-2xl">
             <LuMapPin> </LuMapPin>
@@ -66,7 +66,7 @@ const DestinationDetailsPage = async ({ params }) => {
             </div>
           </div>
           <h1 className="text-3xl font-bold mt-5">Overview</h1>
-          <p>{description}</p>
+          <p className="max-w-6xl">{description}</p>
         </div>
         <BookingCard destination={destination}></BookingCard>
       </div>
