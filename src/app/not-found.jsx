@@ -1,4 +1,6 @@
-import { Link } from "react-router";
+// import Link from 'next/link';
+
+import Link from "next/link";
 
 const NotFoundPage = () => {
     return (
@@ -19,7 +21,7 @@ const NotFoundPage = () => {
 
                 
                 <p className="text-gray-400 mt-5 text-lg leading-relaxed">
-                    The page you are looking for doesn't exist or has been moved.
+                    The page you are looking for does not exist or has been moved.
                     Maybe the URL is broken or the page was removed.
                 </p>
 
