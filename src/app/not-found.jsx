@@ -40,7 +40,7 @@ const NotFoundPage = () => {
                     </button>
                 </div>
                 <p className="mt-12 text-sm text-gray-600">
-                    Lost in space 🚀
+                    Lost in space 
                 </p>
             </div>
         </div>
