@@ -1,5 +1,5 @@
 // import Link from 'next/link';
-
+"use client";
 import Link from "next/link";
 
 const NotFoundPage = () => {
@@ -34,12 +34,12 @@ const NotFoundPage = () => {
                         Back To Home
                     </Link>
 
-                    <button
-                        onClick={() => window.history.back()}
+                    {/* <button
+                        // onClick={() => window.history.back()}
                         className="px-8 py-3 rounded-full border border-gray-700 hover:bg-white hover:text-black transition-all duration-300 font-semibold"
                     >
                         Go Back
-                    </button>
+                    </button> */}
                 </div>
                 <p className="mt-12 text-sm text-gray-600">
                     Lost in space 
